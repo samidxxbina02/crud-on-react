@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
 
-function App() {
+import ContactForm from "./components/ContactForm/Index";
+import ContactList from "./components/ContactList/Index";
+import { appTitle } from "./const/contactData";
+
+import "./index.css";
+
+function ContactBook() {
+  const [editIndex, setEditIndex] = useState(null);
+  const [contacts, setContacts] = useState([]);
+  const [formData, setFormData] = useState({
+    name: "",
+    surname: "",
+    phone: "",
+    email: "",
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <h1>{appTitle}</h1>
+      <ContactForm
+        editIndex={editIndex}
+        setContacts={setContacts}
+        setFormData={setFormData}
+        setEditIndex={setEditIndex}
+        formData={formData}
+        contacts={contacts}
+      />
+      <ContactList
+        contacts={contacts}
+        setContacts={setContacts}
+        setFormData={setFormData}
+        setEditIndex={setEditIndex}
+      />
     </div>
   );
 }
 
-export default App;
+export default ContactBook;
